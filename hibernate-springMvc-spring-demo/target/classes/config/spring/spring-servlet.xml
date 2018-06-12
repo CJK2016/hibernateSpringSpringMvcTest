@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       
+       
+     <!-- 自动注入处理器映射器和适配器 和springmvc拦截器-->
+    <mvc:annotation-driven></mvc:annotation-driven> 
+       
+    <!-- 对静态文件的拦截处理方法 -->
+    <!-- <mvc:default-servlet-handler /> -->
+     <!-- 启用spring mvc 注解 -->
+    <context:annotation-config />
+	
+    <!-- 设置使用注解的类所在的jar包 -->
+    <context:component-scan base-package="com.controller"></context:component-scan>
+    
+    <!-- 完成请求和注解POJO的映射 
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+    -->
+    
+    <!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />  
+    </bean>
+    
+    <!-- 上传文件MultipartResolver处理器 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="maxUploadSize" value="1024000"></property>    
+    </bean>
+    
+ </beans>
